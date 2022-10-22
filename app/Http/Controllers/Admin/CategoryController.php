@@ -51,7 +51,7 @@ class CategoryController extends Controller
         //__Eleoquent__//
 
         $category = new Category;
-        $category->category_name = $request->category_name;
+        $category->category_name = Str::headline($request->category_name);
         $category->category_slug = Str::lower($request->category_name);
         $category->save();
 
@@ -100,7 +100,7 @@ class CategoryController extends Controller
 
         //__Eleoquent__//
 
-        $category->category_name = $request->category_name;
+        $category->category_name = Str::ucfirst($request->category_name);
         $category->category_slug = Str::lower($request->category_name);
         $category->save();
 

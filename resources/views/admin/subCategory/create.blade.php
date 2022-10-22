@@ -24,7 +24,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Create SubCategory</h3>
                         <ol class=" float-sm-right">
-                            <a href="#" class="btn btn-block btn-info btn-sm">All SubCategory</a>
+                            <a href="{{route('subcategory.index')}}" class="btn btn-block btn-info btn-sm">All SubCategory</a>
 
                         </ol>
                     </div>

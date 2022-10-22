@@ -6,12 +6,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>SubCategory</h1>
+                        <h1>Post</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                            <li class="breadcrumb-item active">SubCategory Table</li>
+                            <li class="breadcrumb-item active">Post Table</li>
                         </ol>
                     </div>
                 </div>
@@ -25,9 +25,9 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">All SubCategory</h3>
+                                <h3 class="card-title">All Post</h3>
                                 <ol class=" float-sm-right">
-                                    <a href="{{route('subcategory.create')}}" class="btn btn-block btn-secondary btn-xs">Create SubCategory</a>
+                                    <a href="{{route('post.create')}}" class="btn btn-block btn-secondary btn-xs">Create Post</a>
 
                                 </ol>
                             </div>
@@ -37,21 +37,40 @@
                                     <thead>
                                         <tr>
                                             <th> Sl</th>
-                                            <th>Category Name</th>
-                                            <th>Subcategory Name</th>
-                                            <th>Subcategory Slug</th>
+                                            <th>Category</th>
+                                            <th>Subcategory</th>
+                                            <th>Author</th>
+                                            <th>Title</th>
+                                            <th>Published</th>
+                                            <th>Status</th>
                                             <th>Action</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
 
-                                        @foreach($subCategory as $key=>$row)
+                                        @foreach($post as $key=>$row)
                                         <tr>
                                             <th>{{++$key}}</th>
-                                            <td>{{$row->category->category_name}}</td>
+                                            <!-- These 3 <td> will use when I will join these 3 tables in the controller. But now I'm joining those tables in the model. -->
+
+                                            <!-- <td>{{$row->category_name}}</td>
                                             <td>{{$row->subcategory_name}}</td>
-                                            <td>{{$row->subcategory_slug}}</td>
+                                            <td>{{$row->name}}</td> -->
+
+                                            <td>{{$row->category->category_name}}</td>
+                                            <td>{{$row->subcategory->subcategory_name}}</td>
+                                            <td>{{$row->user->name}}</td>
+                                            <td>{{$row->title}}</td>
+                                            <td>{{$row->post_date}}</td>
+                                            <td>
+                                                @if($row->status===1)
+                                                <span class="badge badge-success">Active</span>
+                                                @else
+                                                <span class="badge badge-danger">Inactive</span>
+                                                @endif
+                                            </td>
+
                                             <td>
                                                 <a href="{{route('subcategory.edit', $row->id)}}" class="btn btn-info">Edit</a>
                                                 <a href="{{route('subcategory.delete', $row->id)}}" class="btn btn-danger delete">Delete</a>
