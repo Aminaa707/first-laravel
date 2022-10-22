@@ -49,7 +49,7 @@
                             <!-- Category & SubCategory -->
                             <div class="form-group ">
                                 <label for="category_name" class="col-sm-2 col-form-label">Category</label>
-                                <select name="subcategory_id" class="form-control">
+                                <select name="category" class="form-control @error('category') is-invalid @enderror " required>
                                     <option disabled selected>Chooce Category</option>
                                     @foreach ($categories as $category )
                                     <!-- Category er under e SubCategory ber kore  -->
@@ -64,6 +64,11 @@
 
                                     @endforeach
                                 </select>
+                                @error('category')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{$message}}</strong>
+                                </span>
+                                @enderror
                             </div>
 
                             <!-- Description -->
@@ -114,6 +119,12 @@
                                 </div>
                             </div>
 
+                            <!-- Chosen Img -->
+                            <div class="col-12 col-md-9 my-4">
+                                <div class="card-img mx-auto rounded-circle">
+                                    <img id="show_img" src="{{(!empty($Post->image)? url($Post->image) : url('media/no_images.png') )}}" alt="user image" width="200px">
+                                </div>
+                            </div>
 
                             <!-- Checkbox -->
                             <div class="form-check col-sm-12">

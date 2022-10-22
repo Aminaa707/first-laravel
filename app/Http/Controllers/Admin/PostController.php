@@ -46,18 +46,18 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'subcategory_id' => 'required',
+            'category' => 'required', // this is subcategory_id
             'title' => 'required',
             'tags' => 'required',
             'description' => 'required',
         ]);
 
-        $categoryid = DB::table('subcategorieds')->where('id', $request->subcategory_id)->first()->category_id; // collecting categoryId from Subcatefori table.
+        $categoryid = DB::table('subcategorieds')->where('id', $request->category)->first()->category_id; // collecting categoryId from Subcatefori table.
         $slug =  Str::slug($request->title, '-');
 
         $data = new Post;
         $data->category_id = $categoryid;
-        $data->subcategory_id = $request->subcategory_id;
+        $data->subcategory_id = $request->category;
         $data->user_id = Auth::id();
         $data->title = $request->title;
         $data->slug = $slug;
@@ -110,18 +110,18 @@ class PostController extends Controller
         $data = Post::find($id);
 
         $validated = $request->validate([
-            'subcategory_id' => 'required',
+            'category' => 'required',
             'title' => 'required',
             'tags' => 'required',
             'description' => 'required',
         ]);
 
-        $categoryid = DB::table('subcategorieds')->where('id', $request->subcategory_id)->first()->category_id; // collecting categoryId from Subcatefori table.
+        $categoryid = DB::table('subcategorieds')->where('id', $request->category)->first()->category_id; // collecting categoryId from Subcatefori table.
         $slug =  Str::slug($request->title, '-');
 
 
         $data->category_id = $categoryid;
-        $data->subcategory_id = $request->subcategory_id;
+        $data->subcategory_id = $request->category;
         $data->user_id = Auth::id();
         $data->title = $request->title;
         $data->slug = $slug;

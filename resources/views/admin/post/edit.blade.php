@@ -115,31 +115,13 @@
                                     <input type="hidden" name="old_image" class="custom-file-input" id="image" value="{{$Post->image}}">
 
                                 </div>
-                                <!-- 
-                                <div class="mt-3">
-                                    @if ($Post->image)
-
-                                    <img src="{{asset($Post->image)}}" style="width:70px; height:70px">
-
-                                    @else
-
-                                    <p>No image found</p>
-
-                                    @endif
-                                </div>
-                            </div> -->
-
 
                                 <!-- Chosen Img -->
-
-
                                 <div class="col-12 col-md-9 my-4">
                                     <div class="card-img mx-auto rounded-circle">
                                         <img id="show_img" src="{{(!empty($Post->image)? url($Post->image) : url('media/no_images.png') )}}" alt="user image" width="200px">
                                     </div>
                                 </div>
-
-
 
                                 <!-- Checkbox -->
                                 <div class="form-check col-sm-12">
@@ -164,17 +146,3 @@
         </section>
     </div>
 </x-app-layout>
-
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#image').change(function(e) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#show_img').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(e.target.files['0']);
-        });
-    });
-</script>
