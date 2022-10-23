@@ -71,14 +71,6 @@
                                 @enderror
                             </div>
 
-
-
-
-
-
-
-
-
                             <!-- Description -->
                             <div class="form-group ">
                                 <label for="description" class="col-sm-2 col-form-label">Description</label>
@@ -132,7 +124,7 @@
                                 <!-- Chosen Img -->
                                 <div class="col-12 col-md-9 my-4">
                                     <div class="card-img mx-auto rounded-circle">
-                                        <img id="show_img" src="{{(!empty($Post->image)? url($Post->image) : url('media/no_images.png') )}}" alt="user image" width="200px">
+                                        <img id="show_img" src="{{(!empty($Post->image)? url($Post->image) : url('public/media/no_images.png') )}}" alt="user image" width="200px">
                                     </div>
                                 </div>
 

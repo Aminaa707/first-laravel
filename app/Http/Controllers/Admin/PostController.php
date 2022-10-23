@@ -79,12 +79,12 @@ class PostController extends Controller
             $photoName = $slug . '.' . $photo->getClientOriginalExtension(); // image name like (slug.png)
 
             // if file exists img will save in this file if file not exist it will first create file then save the img .
-            $relPath = 'media/';
+            $relPath = 'public/media/';
             if (!file_exists(($relPath))) {
                 mkdir(($relPath), 777, true);
             }
-            Image::make($photo)->resize(600, 360)->save('media/' . $photoName); // saving resized img in media folder.
-            $data->image = 'media/' . $photoName; // saving img in database
+            Image::make($photo)->resize(600, 360)->save($relPath . $photoName); // saving resized img in media folder.
+            $data->image = $relPath . $photoName; // saving img in database
             $data->save();
 
             $notification = array(
@@ -154,8 +154,8 @@ class PostController extends Controller
             if (!file_exists(($relPath))) {
                 mkdir(($relPath), 777, true);
             }
-            Image::make($photo)->resize(600, 360)->save('media/' . $photoName); // saving resized img in media folder.
-            $data->image = 'media/' . $photoName; // saving img in database
+            Image::make($photo)->resize(600, 360)->save($relPath . $photoName); // saving resized img in media folder.
+            $data->image = $relPath . $photoName; // saving img in database
             $data->save();
 
             $notification = array(
