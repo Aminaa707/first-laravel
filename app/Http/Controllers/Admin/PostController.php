@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\PostProcessed;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Post;
+use App\Jobs\PostPodcast;
+use App\Models\{Category, Post};
 // use Faker\Core\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use File;
-use Image;
+use File, Image;
+
 
 
 class PostController extends Controller
@@ -68,6 +69,12 @@ class PostController extends Controller
         $data->status = $request->status;
         $photo = $request->image;
 
+        //__PostProcessed event calling start__\\
+        $edata = ['title' => $request->title, 'data' => date('d, F Y', strtotime($request->post_date))];
+        event(new PostProcessed($edata)); // PostProcessed event calling end
+        dispatch(new PostPodcast($edata));
+
+        // Img function start
         if ($photo) {
             $photoName = $slug . '.' . $photo->getClientOriginalExtension(); // image name like (slug.png)
 
@@ -85,13 +92,14 @@ class PostController extends Controller
                 'alert-type' => 'success'
             );
             return redirect()->route('post.index')->with($notification);
-        }
-        $data->save();
+        }  // Img function end
 
+        $data->save();
         $notification = array(
             'message' => 'Post created successfully!',
             'alert-type' => 'success'
         );
+
 
         return redirect()->route('post.index')->with($notification);
     } // End Mathod
@@ -133,7 +141,6 @@ class PostController extends Controller
         $photo = $request->image;
 
         // Img function start
-
         if ($photo) {
             // First Deleting existing imge then save new img with old name.
             if (file_exists($request->old_image)) {
@@ -166,6 +173,8 @@ class PostController extends Controller
             return redirect()->route('post.index')->with($notification);
         }
         // Img function end
+
+
     } // End Mathod
 
 

@@ -49,7 +49,7 @@
                             <!-- Category & SubCategory -->
                             <div class="form-group ">
                                 <label for="category_name" class="col-sm-2 col-form-label">Category</label>
-                                <select name="subcategory_id" class="form-control">
+                                <select name="category" class="form-control @error('category') is-invalid @enderror " required>
                                     <option disabled selected>Chooce Category</option>
                                     @foreach ($categories as $category )
                                     <!-- Category er under e SubCategory ber kore  -->
@@ -59,12 +59,25 @@
                                     <option disabled class="text-info" disabled>{{$category->category_name}}</option>
 
                                     @foreach ($subCategory as $sub )
-                                    <option value="{{$sub -> id}}" @if($sub -> id === $Post->subcategory_id) selected @endif >------{{$sub->subcategory_name}}</option>
+                                    <option value="{{$sub -> id}}" @if($sub -> id === $Post->subcategory_id) selected @endif>------{{$sub->subcategory_name}}</option>
                                     @endforeach
 
                                     @endforeach
                                 </select>
+                                @error('category')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{$message}}</strong>
+                                </span>
+                                @enderror
                             </div>
+
+
+
+
+
+
+
+
 
                             <!-- Description -->
                             <div class="form-group ">
