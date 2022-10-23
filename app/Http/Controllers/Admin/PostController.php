@@ -150,7 +150,7 @@ class PostController extends Controller
             $photoName = $slug . '.' . $photo->getClientOriginalExtension(); // image name like (slug.png)
 
             // if file exists img will save in this file if file not exist it will first create file then save the img .
-            $relPath = 'media/';
+            $relPath = 'public/media/';
             if (!file_exists(($relPath))) {
                 mkdir(($relPath), 777, true);
             }
